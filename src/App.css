@@ -56,6 +56,29 @@ body {
   width: 200px;
 }
 
+.scores-container {
+  width: 100%;
+  color: white;
+  font-size: 30px;
+  margin: -200px 0 0 0;
+  text-align: center;
+}
+
+.scores {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px;
+}
+
+.score {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  background-color: rgb(105, 105, 105);
+  border: 0px solid;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .player {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
   background-color: rgb(41, 41, 41);
