@@ -14,40 +14,44 @@ const Game = () => {
 
   const handleClick = (i) => {
     let boardCopy = [...board];
+
     if (winner || boardCopy[i]) return;
     boardCopy[i] = "X";
     winner = calculateWinner(boardCopy);
-    if (winner === "X") setxScore(xScore + 1);
-    setBoard(boardCopy);
-    if (winner) return;
+
+    if (winner && winner === "X") {
+      setxScore(xScore + 1);
+      setBoard(boardCopy);
+      return;
+    }
+
+    /////////////////////////////////////////////////////////
+    // IMPLEMENT A PROPER RANDOMIZED SYSTEM, DONT FORGET! //
+    ///////////////////////////////////////////////////////
 
     let rand = Math.round(Math.random() * 8);
     let count = 0;
     while (boardCopy[rand] != null) {
       count++;
-      if (count > 8) {
-        break;
-      }
+      if (count > 8) break;
       rand = Math.round(Math.random() * 8);
     }
 
-    if (count <= 8) {
-      boardCopy[rand] = "O";
-    }
+    if (count <= 8) boardCopy[rand] = "O";
     winner = calculateWinner(boardCopy);
-    if (winner === "O") setoScore(oScore + 1);
-    setBoard(boardCopy);
 
-    if (!winner) {
-      let empty = 0;
-      for (let i = 0; i < board.length; i++) {
-        if (boardCopy[i] === null) empty++;
-      }
-      if (empty === 0) {
-        setDraw(true);
-        return;
+    if (winner && winner === "O") setoScore(oScore + 1);
+    else {
+      for (let i = 0; i < boardCopy.length; i++) {
+        if (boardCopy[i] === null) {
+          setDraw(false);
+          break;
+        } else {
+          setDraw(true);
+        }
       }
     }
+    setBoard(boardCopy);
   };
 
   const renderMoves = () => (

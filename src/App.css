@@ -155,3 +155,58 @@ body {
     font-size: 40px;
   }
 }
+
+/* ===========================  X  =========================== */
+.xBG {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(10, 10, 10);
+  border: 2px solid white;
+}
+
+.X {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  border-radius: 6px;
+  transition: 0.3s;
+  animation-name: xBefore;
+  animation-timing-function: linear;
+  animation-duration: 0.5s;
+}
+
+.X:before,
+.X:after {
+  content: "";
+  position: absolute;
+  width: 45px;
+  height: 5px;
+  background-color: white;
+  border-radius: 2px;
+  top: 16px;
+  box-shadow: 0 0 2px 0 #ccc;
+}
+
+.X:before {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  transform: rotate(45deg);
+  left: -2px;
+}
+.X:after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  right: -2px;
+}
+
+@keyframes Xbefore {
+  from {
+    opacity: 0%;
+    color: black;
+  }
+  to {
+    opacity: 100%;
+  }
+}
