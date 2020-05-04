@@ -14,7 +14,6 @@ const Game = () => {
 
   const handleClick = (i) => {
     let boardCopy = [...board];
-
     if (winner || boardCopy[i]) return;
     boardCopy[i] = "X";
     winner = calculateWinner(boardCopy);
@@ -83,8 +82,8 @@ const Game = () => {
       <Board squares={board} onClick={handleClick} />
       <div className="scores-container">
         <div className="scores">
-          <span className="score">X : {xScore}</span>
-          <span className="score">O : {oScore}</span>
+          <span className="score">You : {xScore}</span>
+          <span className="score">Bot : {oScore}</span>
         </div>
       </div>
       <div className="player">
@@ -93,7 +92,7 @@ const Game = () => {
             ? "Draw"
             : winner
             ? "Winner: " + winner
-            : "You are: " + (xIsNext ? "X" : "O")}
+            : `Player ${xIsNext ? "X" : "O"}'s turn`}
         </p>
         <div>
           {renderMoves()}

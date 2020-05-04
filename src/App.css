@@ -43,6 +43,8 @@ body {
 .box {
   background: rgb(10, 10, 10);
   border: 2px solid white;
+  font-family: "Concert One", cursive;
+  font-weight: lighter;
   font-size: 50px;
   cursor: pointer;
   outline: none;
@@ -64,7 +66,7 @@ body {
   width: 100%;
   color: white;
   font-size: 30px;
-  margin: -200px 0 0 0;
+  margin: -210px 0 0 0;
   text-align: center;
 }
 
@@ -98,10 +100,12 @@ body {
   width: 100%;
   position: absolute;
   bottom: 0;
+  text-align: center;
 }
 
 .clear-button {
-  margin-left: 45px;
+  margin-left: 25px;
+  margin-bottom: 5px;
   font-family: "Concert One", cursive;
   font-size: 20px;
   outline: none;
@@ -128,6 +132,26 @@ body {
   transition: 0.3s;
 }
 
-.start-button:hover {
+.clear-button:hover,
+.reset-button:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* ===========================  MOBILE  =========================== */
+
+@media only screen and (max-width: 480px) {
+  .board {
+    margin-top: 100px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .board {
+    width: 250px;
+    height: 250px;
+  }
+
+  .box {
+    font-size: 40px;
+  }
 }
