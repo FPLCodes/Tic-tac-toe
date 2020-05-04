@@ -7,17 +7,18 @@ import "../App.css";
 const Game = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xScore, setxScore] = useState(0);
-  const [yScore, setyScore] = useState(0);
+  const [oScore, setoScore] = useState(0);
   const [xIsNext, setXisNext] = useState(true);
   const [draw, setDraw] = useState(false);
   let winner = calculateWinner(board);
 
   const handleClick = (i) => {
     let boardCopy = [...board];
-    console.log(winner);
+
     if (winner || boardCopy[i]) return;
     boardCopy[i] = "X";
     winner = calculateWinner(boardCopy);
+    if (winner === "X") setxScore(xScore + 1);
     setBoard(boardCopy);
     if (winner) return;
 
@@ -34,8 +35,9 @@ const Game = () => {
     if (count <= 8) {
       boardCopy[rand] = "O";
     }
-    setBoard(boardCopy);
     winner = calculateWinner(boardCopy);
+    if (winner === "O") setoScore(oScore + 1);
+    setBoard(boardCopy);
 
     if (!winner) {
       let empty = 0;
@@ -50,8 +52,8 @@ const Game = () => {
   };
 
   const renderMoves = () => (
-    <button onClick={restart} className="start-button">
-      RESTART
+    <button onClick={restart} className="clear-button">
+      CLEAR
     </button>
   );
 
@@ -61,14 +63,28 @@ const Game = () => {
     winner = null;
   }
 
+  const resetGame = () => (
+    <button onClick={reset} className="reset-button">
+      RESTART
+    </button>
+  );
+
+  function reset() {
+    setBoard(Array(9).fill(null));
+    setDraw(false);
+    winner = null;
+    setxScore(0);
+    setoScore(0);
+  }
+
   return (
     <div>
       <Header />
       <Board squares={board} onClick={handleClick} />
       <div className="scores-container">
         <div className="scores">
-          <span className="score">X: {xScore}</span>
-          <span className="score">Y: {yScore}</span>
+          <span className="score">X : {xScore}</span>
+          <span className="score">O : {oScore}</span>
         </div>
       </div>
       <div className="player">
@@ -79,7 +95,10 @@ const Game = () => {
             ? "Winner: " + winner
             : "You are: " + (xIsNext ? "X" : "O")}
         </p>
-        {renderMoves()}
+        <div>
+          {renderMoves()}
+          {resetGame()}
+        </div>
       </div>
     </div>
   );

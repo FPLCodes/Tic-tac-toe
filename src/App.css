@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Concert+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Concert+One&family=Dosis&display=swap");
 
 body {
   font-family: "Concert One", cursive;
@@ -12,6 +12,8 @@ body {
   background-color: rgb(29, 29, 29);
 }
 
+/* ==========================  HEADER  ============================ */
+
 .title {
   font-size: 35px;
   height: 80px;
@@ -24,6 +26,8 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+/* ==========================  BODY  ============================== */
 
 .board {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
@@ -77,7 +81,10 @@ body {
   border: 0px solid;
   border-radius: 10px;
   padding: 10px;
+  font-family: "Dosis", sans-serif;
 }
+
+/* ===========================  FOOTER  =========================== */
 
 .player {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
@@ -93,8 +100,22 @@ body {
   bottom: 0;
 }
 
-.start-button {
-  margin-left: 35px;
+.clear-button {
+  margin-left: 45px;
+  font-family: "Concert One", cursive;
+  font-size: 20px;
+  outline: none;
+  border-radius: 10px;
+  padding: 7px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  background-color: rgb(247, 250, 81);
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.reset-button {
+  margin-left: 25px;
   font-family: "Concert One", cursive;
   font-size: 20px;
   outline: none;
