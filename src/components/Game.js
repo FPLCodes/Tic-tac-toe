@@ -9,6 +9,7 @@ const Game = () => {
   const [xScore, setxScore] = useState(0);
   const [oScore, setoScore] = useState(0);
   const [xIsNext, setXisNext] = useState(true);
+  const [mode, setMode] = useState("2");
   const [draw, setDraw] = useState(false);
   let winner = calculateWinner(board);
 
@@ -16,7 +17,8 @@ const Game = () => {
     let boardCopy = [...board];
 
     if (winner || boardCopy[i]) return;
-    boardCopy[i] = "X";
+    if (xIsNext) boardCopy[i] = "X";
+    else boardCopy[i] = "O";
     winner = calculateWinner(boardCopy);
 
     if (winner && winner === "X") {
@@ -25,15 +27,18 @@ const Game = () => {
       return;
     }
 
-    let rand = Math.round(Math.random() * 8);
-    let count = 0;
-    while (boardCopy[rand] != null) {
-      count++;
-      if (count > 8) break;
-      rand = Math.round(Math.random() * 8);
-    }
+    if (mode === "Bot") {
+      let rand = Math.round(Math.random() * 8);
+      let count = 0;
+      while (boardCopy[rand] != null) {
+        count++;
+        if (count > 8) break;
+        rand = Math.round(Math.random() * 8);
+      }
 
-    if (count <= 8) boardCopy[rand] = "O";
+      if (count <= 8) boardCopy[rand] = "O";
+    } else setXisNext(!xIsNext);
+
     winner = calculateWinner(boardCopy);
 
     if (winner && winner === "O") setoScore(oScore + 1);
@@ -48,15 +53,16 @@ const Game = () => {
   };
 
   const renderMoves = () => (
-    <button onClick={restart} className="clear-button">
+    <button onClick={clear} className="clear-button">
       CLEAR
     </button>
   );
 
-  function restart() {
+  function clear() {
     setBoard(Array(9).fill(null));
     setDraw(false);
     winner = null;
+    setXisNext(true);
   }
 
   const resetGame = () => (
@@ -66,9 +72,7 @@ const Game = () => {
   );
 
   function reset() {
-    setBoard(Array(9).fill(null));
-    setDraw(false);
-    winner = null;
+    clear();
     setxScore(0);
     setoScore(0);
   }
@@ -77,17 +81,27 @@ const Game = () => {
     <div>
       <Header />
       <div className="mode">
-        <select className="options">
-          <option>Choose Mode</option>
-          <option>2 Players</option>
-          <option>Computer</option>
+        <select
+          className="options"
+          value={mode}
+          onChange={(e) => {
+            setMode(e.target.value);
+            reset();
+          }}
+        >
+          <option value="2">2 Players</option>
+          <option value="Bot">Computer</option>
         </select>
       </div>
       <Board squares={board} onClick={handleClick} />
       <div className="scores-container">
         <div className="scores">
-          <span className="score">You : {xScore}</span>
-          <span className="score">Bot : {oScore}</span>
+          <span className="score">
+            {mode === "Bot" ? `You : ${xScore}` : `Player 1: ${xScore}`}
+          </span>
+          <span className="score">
+            {mode === "Bot" ? `Bot : ${oScore}` : `Player 2: ${oScore}`}
+          </span>
         </div>
       </div>
       <div className="player">

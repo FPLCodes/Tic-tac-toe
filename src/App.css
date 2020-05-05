@@ -17,7 +17,7 @@ body {
 .title {
   font-size: 40px;
   height: 80px;
-  background-color: rgb(53, 53, 53);
+  background-color: rgb(49, 49, 49);
   color: white;
   position: absolute;
   top: 0;
@@ -39,8 +39,17 @@ body {
 }
 
 .options {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
   margin-top: 150px;
-  width: 120px;
+  width: 140px;
+  height: 40px;
+  outline: none;
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 2px;
+  font-size: 20px;
+  font-family: "Concert One";
+  cursor: pointer;
 }
 
 .board {
@@ -171,11 +180,14 @@ body {
 
 @media only screen and (max-width: 480px) {
   .board {
-    margin-top: 100px;
+    margin-top: 140px;
+  }
+  .mode {
+    margin-top: -60px;
   }
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 375px) and (max-height: 667px) {
   .board {
     width: 250px;
     height: 250px;
@@ -183,5 +195,26 @@ body {
 
   .box {
     font-size: 40px;
+  }
+
+  .options {
+    font-size: 17px;
+    width: 100px;
+  }
+
+  .scores-container {
+    margin-top: -175px;
+  }
+  .score {
+    font-size: 20px;
+  }
+
+  .player {
+    font-size: 25px;
+  }
+
+  .clear-button,
+  .reset-button {
+    font-size: 18px;
   }
 }
