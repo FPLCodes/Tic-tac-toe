@@ -25,10 +25,6 @@ const Game = () => {
       return;
     }
 
-    /////////////////////////////////////////////////////////
-    // IMPLEMENT A PROPER RANDOMIZED SYSTEM, DONT FORGET! //
-    ///////////////////////////////////////////////////////
-
     let rand = Math.round(Math.random() * 8);
     let count = 0;
     while (boardCopy[rand] != null) {
@@ -41,16 +37,13 @@ const Game = () => {
     winner = calculateWinner(boardCopy);
 
     if (winner && winner === "O") setoScore(oScore + 1);
-    else {
+    else
       for (let i = 0; i < boardCopy.length; i++) {
         if (boardCopy[i] === null) {
           setDraw(false);
           break;
-        } else {
-          setDraw(true);
-        }
+        } else setDraw(true);
       }
-    }
     setBoard(boardCopy);
   };
 
@@ -83,6 +76,13 @@ const Game = () => {
   return (
     <div>
       <Header />
+      <div className="mode">
+        <select className="options">
+          <option>Choose Mode</option>
+          <option>2 Players</option>
+          <option>Computer</option>
+        </select>
+      </div>
       <Board squares={board} onClick={handleClick} />
       <div className="scores-container">
         <div className="scores">
