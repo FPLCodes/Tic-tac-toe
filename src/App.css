@@ -186,6 +186,7 @@ body {
     margin-top: -60px;
   }
   .box:hover {
+    transform: scale(1);
   }
 }
 
