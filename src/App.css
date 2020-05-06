@@ -12,6 +12,27 @@ body {
   background-color: rgb(29, 29, 29);
 }
 
+.loading {
+  margin: auto;
+  animation-name: load;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+}
+
+@keyframes load {
+  from {
+    width: 0%;
+    height: 0%;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    height: 100%;
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 /* ==========================  HEADER  ============================ */
 
 .title {

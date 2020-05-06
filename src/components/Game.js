@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { calculateWinner } from "../helpers";
 import Board from "./Board";
 import Header from "./Header";
 import "../App.css";
 
 const Game = () => {
+  const [loading, setLoading] = useState(false);
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xScore, setxScore] = useState(0);
   const [oScore, setoScore] = useState(0);
@@ -12,6 +13,13 @@ const Game = () => {
   const [mode, setMode] = useState("2");
   const [draw, setDraw] = useState(false);
   let winner = calculateWinner(board);
+
+  useEffect(() => {
+    setLoading(true);
+    setInterval(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   const handleClick = (i) => {
     let boardCopy = [...board];
@@ -40,7 +48,6 @@ const Game = () => {
     } else setXisNext(!xIsNext);
 
     winner = calculateWinner(boardCopy);
-
     if (winner && winner === "O") setoScore(oScore + 1);
     else
       for (let i = 0; i < boardCopy.length; i++) {
@@ -79,44 +86,52 @@ const Game = () => {
 
   return (
     <div>
-      <Header />
-      <div className="mode">
-        <select
-          className="options"
-          value={mode}
-          onChange={(e) => {
-            setMode(e.target.value);
-            reset();
-          }}
-        >
-          <option value="2">2 Players</option>
-          <option value="Bot">Computer</option>
-        </select>
-      </div>
-      <Board squares={board} onClick={handleClick} />
-      <div className="scores-container">
-        <div className="scores">
-          <span className="score">
-            {mode === "Bot" ? `You : ${xScore}` : `Player 1: ${xScore}`}
-          </span>
-          <span className="score">
-            {mode === "Bot" ? `Bot : ${oScore}` : `Player 2: ${oScore}`}
-          </span>
+      {loading ? (
+        <div className="loading">
+          <Board squares={board} onClick={handleClick} />
         </div>
-      </div>
-      <div className="player">
-        <p>
-          {draw
-            ? "Draw"
-            : winner
-            ? "Winner: " + winner
-            : `Player ${xIsNext ? "X" : "O"}'s turn`}
-        </p>
+      ) : (
         <div>
-          {renderMoves()}
-          {resetGame()}
+          <Header />
+          <div className="mode">
+            <select
+              className="options"
+              value={mode}
+              onChange={(e) => {
+                setMode(e.target.value);
+                reset();
+              }}
+            >
+              <option value="2">2 Players</option>
+              <option value="Bot">Computer</option>
+            </select>
+          </div>
+          <Board squares={board} onClick={handleClick} />
+          <div className="scores-container">
+            <div className="scores">
+              <span className="score">
+                {mode === "Bot" ? `You : ${xScore}` : `Player 1: ${xScore}`}
+              </span>
+              <span className="score">
+                {mode === "Bot" ? `Bot : ${oScore}` : `Player 2: ${oScore}`}
+              </span>
+            </div>
+          </div>
+          <div className="player">
+            <p>
+              {draw
+                ? "Draw"
+                : winner
+                ? "Winner: " + winner
+                : `Player ${xIsNext ? "X" : "O"}'s turn`}
+            </p>
+            <div>
+              {renderMoves()}
+              {resetGame()}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
